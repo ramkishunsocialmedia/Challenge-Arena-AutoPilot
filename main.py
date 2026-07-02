@@ -21,7 +21,7 @@ client = gspread.authorize(creds)
 # 2. आपकी Google Sheet खोलना
 try:
     # ध्यान दें: आपकी शीट का नाम बिल्कुल यही होना चाहिए
-    sheet = client.open("Two Players - Google Sheets").worksheet("Matches")
+    sheet = client.open("Two Players").worksheet("Matches")
     print("✅ Google Sheet Successfully Connected!")
 except Exception as e:
     print(f"❌ Sheet Error: {e}")
