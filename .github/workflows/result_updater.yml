@@ -1,0 +1,28 @@
+name: Auto-Pilot Result Updater
+
+on:
+  schedule:
+    - cron: '30 */3 * * *' # यह रोबोट हर 3 घंटे में चेक करेगा कि कोई मैच खत्म हुआ या नहीं
+  workflow_dispatch: # मैन्युअल चलाने के लिए बटन
+
+jobs:
+  update-results:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install libraries
+        run: pip install -r requirements.txt
+
+      - name: Run Winner Update Code
+        env:
+          GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+          SPORTS_API_KEY: ${{ secrets.SPORTS_API_KEY }}
+        run: python update_results.py
