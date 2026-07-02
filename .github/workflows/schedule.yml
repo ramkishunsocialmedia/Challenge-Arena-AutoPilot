@@ -1,0 +1,28 @@
+name: Auto-Pilot Match Fetcher
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # यह रोज़ सुबह लगभग 7:30 बजे (IST) चलेगा
+  workflow_dispatch: # यह आपको कभी भी बटन दबाकर चलाने की सुविधा देता है
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install libraries
+        run: pip install -r requirements.txt
+
+      - name: Run Auto-Pilot Code
+        env:
+          GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+          SPORTS_API_KEY: ${{ secrets.SPORTS_API_KEY }}
+        run: python main.py
