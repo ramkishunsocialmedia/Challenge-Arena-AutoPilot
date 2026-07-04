@@ -1,9 +1,9 @@
 name: Auto-Pilot Match Fetcher
 
 on:
-  schedule:
-    - cron: '0 2 * * *' # यह रोज़ सुबह लगभग 7:30 बजे (IST) चलेगा
-  workflow_dispatch: # यह आपको कभी भी बटन दबाकर चलाने की सुविधा देता है
+schedule:
+    - cron: '30 0,7,12 * * *' # यह रोज़ सुबह 6:00, दोपहर 1:00, और शाम 6:00 बजे (IST) चलेगा
+  workflow_dispatch: # यह आपको कभी भी बटन दबाकर (Manual) चलाने की सुविधा देता है
 
 jobs:
   run-script:
